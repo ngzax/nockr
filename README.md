@@ -1,2 +1,2 @@
 # nockr
-Nock interpreter in Ruby
+NockR - A Nock interpreter in Ruby.
