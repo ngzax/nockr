@@ -1,5 +1,5 @@
 # nockr
-## NockR - A Nock interpreter in a RubyGem.
+## Nockr - A Nock interpreter in a RubyGem.
 
 ## Installation
 

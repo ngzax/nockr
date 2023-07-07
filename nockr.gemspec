@@ -6,7 +6,7 @@ Gem::Specification.new do |s|
   s.description = %q{Nock is Urbit's assembly language. This gem lets you interpret and run it from Ruby."}
   s.authors     = ["Daryl Richter"]
   s.email       = ["winter8@duck.com"]
-  s.version     = NockR::VERSION
+  s.version     = Nockr::VERSION
 
   s.homepage    = "https://rubygems.org/gems/nockr"
   s.license     = "BSD-3-Clause"

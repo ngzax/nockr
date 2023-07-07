@@ -1,5 +1,5 @@
-describe NockR do
+describe Nockr do
   it "has a version number" do
-    expect(NockR::VERSION).to_not be_nil
+    expect(Nockr::VERSION).to_not be_nil
   end
 end

@@ -1,10 +1,11 @@
 require "nockr/noun"
 
-module NockR
+module Nockr
   class << self
     def nock(input)
-      n = NockR::Noun.new input_ary: input
-      puts "#{n.interpret}"
+      n = Noun.new input_ary: input
+      puts "Interpreting #{input} as Nock..."
+      puts "=> #{n.interpret}"
     end
   end
 end

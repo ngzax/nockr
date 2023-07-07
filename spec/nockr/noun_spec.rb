@@ -1,10 +1,23 @@
 require "nockr/noun"
 
-describe NockR::Noun do
+describe Nockr::Noun do
   context "have right associativity" do
-    it "doesn't touch a simple cell" do
+    it "single element array" do
+      # [0] => [0]
+      expect(Nockr::Noun.new(input_ary: [0]).interpret).to eq([0])
+    end
+
+    it "simple tuple cell" do
       # [0, 1] => [0, 1]
-      expect(Noun.new([0, 1]).interpret).to eq([1, 2])
+      expect(Nockr::Noun.new(input_ary: [0, 1]).interpret).to eq([0, 1])
+    end
+
+    it "3-tuples" do
+      # [0, 1, 2] => [0, [1, 2]]
+      expect(Nockr::Noun.new(input_ary: [0, 1, 2]).interpret).to eq([0, [1, 2]])
+
+      # [0, [1, 2]] => [0, [1, 2]]
+      expect(Nockr::Noun.new(input_ary: [0, [1, 2]]).interpret).to eq([0, [1, 2]])
     end
   end
 

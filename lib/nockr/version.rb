@@ -1,5 +1,5 @@
 # frozen_string_literal: true
 
-module NockR
+module Nockr
   VERSION = "0.0.2"
 end

@@ -1,4 +1,4 @@
-module NockR
+module Nockr
   class Noun
     def initialize(input_ary:)
       raise ArgumentError.new("a Noun must be initialized with an Array") unless input_ary.is_a? Array
@@ -7,7 +7,11 @@ module NockR
 
     def interpret
       @n = self.to_tuples @i
-      return "Interpreting #{@n} as Nock."
+      # return "Interpreting #{@n} as Nock."
+    end
+
+    def to_a
+      @n
     end
 
     #
@@ -15,6 +19,7 @@ module NockR
     #
     def to_tuples(ary)
       return ary unless ary.is_a? Array
+      return ary if 1 == ary.size
       return [self.to_tuples(ary[0]), self.to_tuples(ary[1])] if 2 == ary.size
       return [ary[0], self.to_tuples(ary[1..])]
     end
