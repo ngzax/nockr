@@ -10,6 +10,10 @@ module NockR
       return "Interpreting #{@n} as Nock."
     end
 
+    def to_a
+      @n
+    end
+
     #
     # q.v. https://github.com/belisarius222/pynock
     #
