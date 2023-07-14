@@ -1,8 +1,19 @@
 module Nockr
   class Noun
+    attr_reader :i
+
     def initialize(input_ary:)
       raise ArgumentError.new("a Noun must be initialized with an Array") unless input_ary.is_a? Array
       @i = input_ary
+    end
+
+    def ==(another_noun)
+      another_noun.i == self.i
+    end
+
+    def at(index:)
+      return self if 1 == index
+      Noun.new(input_ary: [1])
     end
 
     def interpret
@@ -14,6 +25,8 @@ module Nockr
       @n
     end
 
+    #
+    # [a b c]  [a [b c]]
     #
     # q.v. https://github.com/belisarius222/pynock
     #
