@@ -14,7 +14,7 @@ module Nockr
     end
 
     def at(index:)
-      return Atom.new(@i[0]) if 1 == index
+      return self if 1 == index
       Atom.new(1)
     end
 

@@ -52,7 +52,7 @@ describe Nockr::Noun do
   context "can retrieve sub-Noun at an index" do
     it "for tuple cells" do
       # 1 is the tree root
-      expect(cell.at(index: 1)).to eq(atom0)
+      expect(cell.at(index: 1)).to eq(cell)
 
       # The head of every node n is 2n
       expect(cell.at(index: 2)).to eq(atom1)
