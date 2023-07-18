@@ -1,8 +1,10 @@
+require "nockr/atom"
 require "nockr/noun"
 
 describe Nockr::Noun do
-  let(:atom0) {described_class.new(input_ary: [0])}
-  let(:atom1) {described_class.new(input_ary: [1])}
+  let(:atom0) {Nockr::Atom.new(0)}
+  let(:atom1) {Nockr::Atom.new(1)}
+
   let(:cell) {described_class.new(input_ary: [0, 1])}
 
   context "can be compared" do
@@ -50,7 +52,7 @@ describe Nockr::Noun do
   context "can retrieve sub-Noun at an index" do
     it "for tuple cells" do
       # 1 is the tree root
-      expect(cell.at(index: 1)).to eq(cell)
+      expect(cell.at(index: 1)).to eq(atom0)
 
       # The head of every node n is 2n
       expect(cell.at(index: 2)).to eq(atom1)

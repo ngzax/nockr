@@ -1,3 +1,5 @@
+require "nockr/atom"
+
 module Nockr
   class Noun
     attr_reader :i
@@ -12,8 +14,8 @@ module Nockr
     end
 
     def at(index:)
-      return self if 1 == index
-      Noun.new(input_ary: [1])
+      return Atom.new(@i[0]) if 1 == index
+      Atom.new(1)
     end
 
     def interpret
@@ -32,7 +34,7 @@ module Nockr
     #
     def to_tuples(ary)
       return ary unless ary.is_a? Array
-      return ary if 1 == ary.size
+      return Atom.new(ary[0]) if 1 == ary.size
       return [self.to_tuples(ary[0]), self.to_tuples(ary[1])] if 2 == ary.size
       return [ary[0], self.to_tuples(ary[1..])]
     end
