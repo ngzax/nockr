@@ -24,6 +24,8 @@ Gem::Specification.new do |s|
   s.bindir        = "bin"
   s.require_paths = ["lib"]
 
-  s.add_development_dependency "pry",   "~> 0.13"
-  s.add_development_dependency "rspec", "~> 3.10"
+  s.add_development_dependency "pry",          "~> 0.13"
+  s.add_development_dependency "rspec",        "~> 3.10"
+  s.add_development_dependency "ruby-fsevent", "~> 0.2"
+  s.add_development_dependency "observr",      "~> 1.0"
 end
