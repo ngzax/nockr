@@ -20,7 +20,7 @@ describe Nockr::Noun do
   context "has right associativity" do
     it "for single element array" do
       # [0] => [0]
-      expect(Nockr::Noun.new(input_ary: [0]).interpret).to eq(atom0.interpret)
+      expect(Nockr::Noun.new(input_ary: [0]).interpret).to eq(atom0)
     end
 
     it "for tuple cells" do
