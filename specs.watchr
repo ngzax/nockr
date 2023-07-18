@@ -4,8 +4,8 @@
 # --------------------------------------------------
 # Rules
 # --------------------------------------------------
-watch( '^lib/nockr/(.*)\.rb'        ){ |m| bundle exec "rspec -f d spec"}
-watch( '^spec/nockr/(.*)_spec.*\.rb'){ |m| bundle exec "rspec -f d spec"}
+watch( '^lib/nockr/(.*)\.rb'        ){ |m| system("bundle exec rspec -f d spec")}
+watch( '^spec/nockr/(.*)_spec.*\.rb'){ |m| system("bundle exec rspec -f d spec")}
 
 # --------------------------------------------------
 # Signal Handling

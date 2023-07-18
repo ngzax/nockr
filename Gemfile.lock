@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    nockr (0.0.2)
+    nockr (0.0.3)
 
 GEM
   remote: https://rubygems.org/
@@ -9,6 +9,7 @@ GEM
     coderay (1.1.3)
     diff-lcs (1.5.0)
     method_source (1.0.0)
+    observr (1.0.5)
     pry (0.14.2)
       coderay (~> 1.1)
       method_source (~> 1.0)
@@ -26,15 +27,18 @@ GEM
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.12.0)
     rspec-support (3.12.1)
+    ruby-fsevent (0.2.1)
 
 PLATFORMS
   x86_64-darwin-22
 
 DEPENDENCIES
   nockr!
+  observr (~> 1.0)
   pry (~> 0.13)
   rake (~> 13.0)
   rspec (~> 3.10)
+  ruby-fsevent (~> 0.2)
 
 BUNDLED WITH
    2.4.14
