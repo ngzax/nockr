@@ -1,30 +1,31 @@
-require "nockr/atom"
+# frozen_string_literal: true
 
 module Nockr
   class Noun
-    attr_reader :i
+    attr_reader :ary, :n
 
-    def initialize(input_ary:)
-      raise ArgumentError.new("a Noun must be initialized with an Array") unless input_ary.is_a? Array
-      @i = input_ary
+    def initialize(from_ary:)
+      raise ArgumentError.new("a Noun must be initialized with an Array") unless from_ary.is_a? Array
+      @ary = self.to_tuples from_ary
+      @n = self.nonify @ary
     end
 
     def ==(another_noun)
-      another_noun.i == self.i
+      another_noun.ary == self.ary
     end
 
     def at(index:)
       return self if 1 == index
-      Atom.new(1)
+      return self.n.at(index: index)
     end
 
-    def interpret
-      @n = self.to_tuples @i
-      # return "Interpreting #{@n} as Nock."
-    end
+    private
 
-    def to_a
-      @n
+    def nonify(ary)
+      return Atom.new(ary) unless ary.is_a? Array
+      return Atom.new(ary[0]) if 1 == ary.size
+      return Cell.new(head: self.nonify(ary[0]), tail: self.nonify(ary[1])) if 2 == ary.size
+      return [ary[0], self.nonify(ary[1..])]
     end
 
     #
@@ -34,7 +35,7 @@ module Nockr
     #
     def to_tuples(ary)
       return ary unless ary.is_a? Array
-      return Atom.new(ary[0]) if 1 == ary.size
+      return ary if 1 == ary.size
       return [self.to_tuples(ary[0]), self.to_tuples(ary[1])] if 2 == ary.size
       return [ary[0], self.to_tuples(ary[1..])]
     end

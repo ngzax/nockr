@@ -1,15 +1,15 @@
-require 'nockr/noun'
+# frozen_string_literal: true
 
 module Nockr
   class Atom < Noun
 
     def initialize(i)
       raise ArgumentError.new("an Atom must be initialized with a Natural Number") unless i.is_a? Integer
-      @i = i
+      @ary = [i]
     end
 
     def at(index:)
-      i
+      self
     end
   end
 end

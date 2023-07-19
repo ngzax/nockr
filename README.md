@@ -10,13 +10,23 @@ gem 'nockr'
 ```
 
 And then execute:
-    $ bundle install
+```sh
+bundle install
+```
 
-Or install it yourself as:
-    $ gem install nockr
+Or install it yourself into ruby:
+```sh
+gem install nockr
+```
 
 ## Testing
 
+### Run all tests, once
 ```sh
 bin/test
+```
+
+### Run tests continuously
+```sh
+bundle exec guard
 ```

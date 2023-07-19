@@ -1,4 +1,4 @@
-require 'nockr/noun'
+# frozen_string_literal: true
 
 module Nockr
   class Cell < Noun

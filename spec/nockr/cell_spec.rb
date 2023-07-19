@@ -1,5 +1,4 @@
-require "nockr/atom"
-require "nockr/cell"
+# frozen_string_literal: true
 
 describe Nockr::Cell do
   let(:atom0) {Nockr::Atom.new(0)}

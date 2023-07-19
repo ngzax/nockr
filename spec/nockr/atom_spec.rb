@@ -1,4 +1,4 @@
-require "nockr/atom"
+# frozen_string_literal: true
 
 describe Nockr::Atom do
   let(:atom0) {described_class.new(0)}

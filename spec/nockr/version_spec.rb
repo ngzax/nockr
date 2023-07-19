@@ -1,4 +1,4 @@
-require "nockr/version"
+# frozen_string_literal: true
 
 describe Nockr do
   it "has a version number" do
