@@ -24,6 +24,8 @@ Gem::Specification.new do |s|
   s.bindir        = "bin"
   s.require_paths = ["lib"]
 
+  s.add_development_dependency "guard", "~> 2.1"
+  s.add_development_dependency "guard-rspec", "~> 4.7"
   s.add_development_dependency "pry",   "~> 0.13"
   s.add_development_dependency "rspec", "~> 3.10"
 end

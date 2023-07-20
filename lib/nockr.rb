@@ -1,6 +1,11 @@
-require "nockr/noun"
+# frozen_string_literal: true
 
 module Nockr
+  require_relative "nockr/noun"
+  require_relative "nockr/atom"
+  require_relative "nockr/cell"
+  require_relative "nockr/version"
+
   class << self
     def nock(input)
       n = Noun.new input_ary: input
@@ -9,3 +14,5 @@ module Nockr
     end
   end
 end
+
+# extend Nockr::Atom

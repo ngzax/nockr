@@ -1,0 +1,18 @@
+#!/usr/bin/env ruby
+
+# require "bundler/setup"
+require "pry"
+require_relative "../lib/nockr.rb"
+
+# For the Pry session, don't make us prefix everything with Nockr::
+class Module
+  def const_missing(name)
+    klass = const_get("Nockr::#{name}")
+    return klass if klass
+  end
+end
+
+puts "Welcome! This is an interactive environment for running Nock."
+
+Pry.config.print = proc { |output, value| output.puts "=> #{value}" }
+Pry.start
