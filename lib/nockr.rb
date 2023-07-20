@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
 module Nockr
-  require "nockr/noun"
-  require "nockr/atom"
-  require "nockr/cell"
-  require "nockr/version"
+  require_relative "nockr/noun"
+  require_relative "nockr/atom"
+  require_relative "nockr/cell"
+  require_relative "nockr/version"
 
   class << self
     def nock(input)

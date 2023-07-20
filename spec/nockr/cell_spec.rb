@@ -16,9 +16,29 @@ describe Nockr::Cell do
   # cell with [cell cell]
   let(:cell_cc) {described_class.new(head: cell_ac, tail: cell_ca)}
 
-  context "can be compared" do
+  context "comparing" do
     it "is equal to itself" do
       expect(cell_aa).to eq(cell_aa)
+    end
+  end
+
+  context "converting" do
+    it "can be represented as an array" do
+      expect(cell_aa.ary).to eq([0, 1])
+      expect(cell_ac.ary).to eq([0, [0, 1]])
+      expect(cell_ca.ary).to eq([[0, [0, 1]], 0])
+      #                           cellac      cellca
+      expect(cell_cc.ary).to eq([[0, [0, 1]], [[0, [0, 1]], 0]])
+    end
+  end
+
+  context "testing" do
+    it "knows its a cell" do
+      expect(cell_aa.cell?).to be true
+    end
+
+    it "knows its not an atom" do
+      expect(cell_aa.atom?).to be false
     end
   end
 

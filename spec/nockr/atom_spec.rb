@@ -10,9 +10,25 @@ describe Nockr::Atom do
     end
   end
 
-  context "can be compared" do
+  context "comparing" do
     it "is equal to itself" do
       expect(atom0).to eq(atom0)
+    end
+  end
+
+  context "converting" do
+    it "can be represented as an array" do
+      expect(atom0.ary).to eq([0])
+    end
+  end
+
+  context "testing" do
+    it "knows its an atom" do
+      expect(atom0.atom?).to be true
+    end
+
+    it "knows its not a cell" do
+      expect(atom0.cell?).to be false
     end
   end
 

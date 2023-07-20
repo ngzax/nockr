@@ -63,7 +63,8 @@ describe Nockr::Noun do
       expect(noun.at(index: 3)).to eq(atom1)
 
       # ([[0, 1], 2], [[0, 1], 2]),
-      # expect(Nockr::Noun.new(from_ary: [[0, 1], 2]).interpret).to eq([[0, 1], 2])
+      expect(Nockr::Noun.new(from_ary: [[0, 1], 2]).at(index: 1).ary).to eq([[0, 1], 2])
+      expect(Nockr::Noun.new(from_ary: [[0, 1], 2]).at(index: 2)).to eq(cell_aa)
     end
   end
 end

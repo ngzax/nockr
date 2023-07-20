@@ -19,7 +19,7 @@ module Nockr
       return self.n.at(index: index)
     end
 
-    private
+    # private
 
     def nonify(ary)
       return Atom.new(ary) unless ary.is_a? Array
