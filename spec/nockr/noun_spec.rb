@@ -7,9 +7,9 @@ describe Nockr::Noun do
   # cell with [atom atom]
   let(:cell_aa) {Nockr::Cell.new(head: atom0, tail: atom1)}
 
-  let(:noun0) {described_class.new(from_ary: [0, 1])}
-  let(:noun1) {described_class.new(from_ary: [[0, 1], 2])}
-  let(:noun2) {described_class.new(from_ary: [[0, 1], [2, [3, 4]]])}
+  let(:noun0) {described_class.from_ary [0, 1]}
+  let(:noun1) {described_class.from_ary [[0, 1], 2]}
+  let(:noun2) {described_class.from_ary [[0, 1], [2, [3, 4]]]}
 
   context "can be compared" do
     it "is equal to itself" do
@@ -17,19 +17,19 @@ describe Nockr::Noun do
     end
 
     it "is equal if internal tuple tree is identical" do
-      expect(noun0).to eq(Nockr::Noun.new(from_ary: [0, 1]))
+      expect(noun0).to eq(Nockr::Noun.from_ary [0, 1])
     end
   end
 
   context "has right associativity" do
     it "for single element array" do
       # [0] => [0]
-      expect(Nockr::Noun.new(from_ary: [0]).ary).to eq([0])
+      expect((Nockr::Noun.from_ary [0]).ary).to eq([0])
     end
 
     it "for tuple nouns" do
       # [0, 1] => [0, 1]
-      expect(Nockr::Noun.new(from_ary: [0, 1]).ary).to eq([0, 1])
+      expect((Nockr::Noun.from_ary [0, 1]).ary).to eq([0, 1])
 
       # ([[0, 1], 2], [[0, 1], 2]),
       expect(noun1.ary).to eq([[0, 1], 2])
@@ -37,19 +37,19 @@ describe Nockr::Noun do
 
     it "for 3-tuples" do
       # [0, 1, 2] => [0, [1, 2]]
-      expect(Nockr::Noun.new(from_ary: [0, 1, 2]).ary).to eq([0, [1, 2]])
+      expect((Nockr::Noun.from_ary [0, 1, 2]).ary).to eq([0, [1, 2]])
 
       # [0, [1, 2]] => [0, [1, 2]]
-      expect(Nockr::Noun.new(from_ary: [0, [1, 2]]).ary).to eq([0, [1, 2]])
+      expect((Nockr::Noun.from_ary [0, [1, 2]]).ary).to eq([0, [1, 2]])
     end
 
     it "for 4-tuples" do
       # [0, 1, 2, 3] => [0, [1, [2, 3]]]
-      expect(Nockr::Noun.new(from_ary: [0, 1, 2, 3]).ary).to eq([0, [1, [2, 3]]])
+      expect((Nockr::Noun.from_ary [0, 1, 2, 3]).ary).to eq([0, [1, [2, 3]]])
     end
 
     it "for n-tuples" do
-      expect(Nockr::Noun.new(from_ary: [1, 0, [541, 25, 99]]).ary).to eq([1, [0, [541, [25, 99]]]])
+      expect((Nockr::Noun.from_ary [1, 0, [541, 25, 99]]).ary).to eq([1, [0, [541, [25, 99]]]])
     end
   end
 
