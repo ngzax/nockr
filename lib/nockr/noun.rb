@@ -16,7 +16,10 @@ module Nockr
 
     def at(index:)
       return self if 1 == index
-      return self.n.at(index: index)
+      return self.n.at(index: index) if index < 4
+      n = index / 2
+      r = (index % 2) - 1
+      return self.n.at(index: n).at(index: n + r)
     end
 
     # private

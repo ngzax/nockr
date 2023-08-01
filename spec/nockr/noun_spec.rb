@@ -7,15 +7,17 @@ describe Nockr::Noun do
   # cell with [atom atom]
   let(:cell_aa) {Nockr::Cell.new(head: atom0, tail: atom1)}
 
-  let(:noun) {described_class.new(from_ary: [0, 1])}
+  let(:noun0) {described_class.new(from_ary: [0, 1])}
+  let(:noun1) {described_class.new(from_ary: [[0, 1], 2])}
+  let(:noun2) {described_class.new(from_ary: [[0, 1], [2, [3, 4]]])}
 
   context "can be compared" do
     it "is equal to itself" do
-      expect(noun).to eq(noun)
+      expect(noun0).to eq(noun0)
     end
 
     it "is equal if internal tuple tree is identical" do
-      expect(noun).to eq(Nockr::Noun.new(from_ary: [0, 1]))
+      expect(noun0).to eq(Nockr::Noun.new(from_ary: [0, 1]))
     end
   end
 
@@ -30,7 +32,7 @@ describe Nockr::Noun do
       expect(Nockr::Noun.new(from_ary: [0, 1]).ary).to eq([0, 1])
 
       # ([[0, 1], 2], [[0, 1], 2]),
-      expect(Nockr::Noun.new(from_ary: [[0, 1], 2]).ary).to eq([[0, 1], 2])
+      expect(noun1.ary).to eq([[0, 1], 2])
     end
 
     it "for 3-tuples" do
@@ -54,17 +56,29 @@ describe Nockr::Noun do
   context "can retrieve sub-Noun at an index" do
     it "for tuple nouns" do
       # 1 is the tree root
-      expect(noun.at(index: 1)).to eq(noun)
+      # /[1 a] => a
+      expect(noun0.at(index: 1)).to eq(noun0)
 
       # The head of every node n is 2n
-      expect(noun.at(index: 2)).to eq(atom0)
+      # /[2 a b] => a
+      expect(noun0.at(index: 2)).to eq(atom0)
 
       # The tail of every node n is 2n - 1
-      expect(noun.at(index: 3)).to eq(atom1)
+      # /[3 a b] => b
+      expect(noun0.at(index: 3)).to eq(atom1)
 
-      # ([[0, 1], 2], [[0, 1], 2]),
-      expect(Nockr::Noun.new(from_ary: [[0, 1], 2]).at(index: 1).ary).to eq([[0, 1], 2])
-      expect(Nockr::Noun.new(from_ary: [[0, 1], 2]).at(index: 2)).to eq(cell_aa)
+      # [[0 1] 2]
+      expect(noun1.at(index: 1).ary).to eq([[0, 1], 2])
+      expect(noun1.at(index: 2)).to eq(cell_aa)
+      expect(noun1.at(index: 3)).to eq(Nockr::Atom.new(2))
+
+      # expect(noun1.at(index: 4)).to eq(atom0)
+      # expect(noun1.at(index: 5)).to eq(atom1)
+      # expect {noun1.at(index: 6)}.to raise_error(ArgumentError)
+
+      # [[0 1] [2 [3 4]]]
+      expect(noun2.at(index: 3).ary).to eq([2, [3, 4]])
+      # expect(noun2.at(index: 6).ary).to eq(2)
     end
   end
 end

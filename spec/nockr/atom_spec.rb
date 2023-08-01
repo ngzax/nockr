@@ -32,11 +32,16 @@ describe Nockr::Atom do
     end
   end
 
-  context "interface" do
-    it "returns itself for any index" do
-      # [0] => [0]
+  context "indexing interface" do
+    it "returns itself for index 1" do
+      # /[1 a] => a
+      # .*(1 [0 1]) => 1
       expect(atom0.at(index: 1)).to eq(atom0)
-      expect(atom0.at(index: 8)).to eq(atom0)
+    end
+
+    it "crashes for any index > 1" do
+      # .*(1 [0 2]) => dojo: hoon expression failed
+      expect {atom0.at(index: 8)}.to raise_error(ArgumentError)
     end
   end
 end
