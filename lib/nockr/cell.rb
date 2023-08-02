@@ -51,6 +51,10 @@ module Nockr
       true
     end
 
+    def nock?
+      self.h.cell? && self.t.cell?
+    end
+
     def to_s
       "[#{self.h} #{self.t}]"
     end

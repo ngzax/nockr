@@ -22,11 +22,6 @@ module Nockr
       self
     end
 
-    def at(index:)
-      raise ArgumentError.new("Invalid Index.") if index < 1 || index > 3
-      self
-    end
-
     def atom?
       true
     end
@@ -35,12 +30,8 @@ module Nockr
       false
     end
 
-    def h
-      i
-    end
-
-    def t
-      i
+    def nock?
+      false
     end
 
     def to_s

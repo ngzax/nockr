@@ -50,6 +50,9 @@ describe Nockr::Noun do
 
     it "for n-tuples" do
       expect((Nockr::Noun.from_ary [1, 0, [541, 25, 99]]).ary).to eq([1, [0, [541, [25, 99]]]])
+
+      # Real Nock
+      expect((Nockr::Noun.from_ary [ [2, [3, 4] ], [0, 1] ]).ary).to eq([[2, [3, 4]], [0, 1]])
     end
   end
 

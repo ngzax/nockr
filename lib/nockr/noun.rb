@@ -2,8 +2,6 @@
 
 module Nockr
   class Noun
-    attr_reader :ary, :n
-
     class << self
       def from_ary(ary)
         raise ArgumentError.new("a Noun must be initialized with an Array") unless ary.is_a? Array
@@ -35,9 +33,9 @@ module Nockr
       raise "Cannot initialize an abstract Noun class"
     end
 
-    def ==(another_noun)
-      another_noun.ary == self.ary
+    def interpret
+      raise "Cannot interpret without [[subject] [formula]]" unless self.nock?
+      self
     end
-
   end
 end

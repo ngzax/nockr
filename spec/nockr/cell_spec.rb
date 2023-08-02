@@ -46,6 +46,11 @@ describe Nockr::Cell do
     it "knows its not an atom" do
       expect(cell_aa.atom?).to be false
     end
+
+    it "can be nock only if it is a cell of cells" do
+      expect(cell_aa.nock?).to be false
+      expect(Nockr::Noun.from_ary([[2, [3, 4]], [0, 1]]).nock?).to be true
+    end
   end
 
   context "indexing interface" do
