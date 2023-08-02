@@ -72,13 +72,29 @@ describe Nockr::Noun do
       expect(noun1.at(index: 2)).to eq(cell_aa)
       expect(noun1.at(index: 3)).to eq(Nockr::Atom.new(2))
 
-      # expect(noun1.at(index: 4)).to eq(atom0)
-      # expect(noun1.at(index: 5)).to eq(atom1)
-      # expect {noun1.at(index: 6)}.to raise_error(ArgumentError)
+      expect(noun1.at(index: 4)).to eq(atom0)
+      expect(noun1.at(index: 5)).to eq(atom1)
+
+      expect {noun1.at(index: 6)}.to raise_error(ArgumentError)
+      expect {noun1.at(index: 7)}.to raise_error(ArgumentError)
 
       # [[0 1] [2 [3 4]]]
+      expect(noun2.at(index: 1).ary).to eq([[0, 1], [2, [3, 4]]])
+      expect(noun2.at(index: 2).ary).to eq([0, 1])
       expect(noun2.at(index: 3).ary).to eq([2, [3, 4]])
-      # expect(noun2.at(index: 6).ary).to eq(2)
+
+      expect(noun2.at(index: 4)).to eq(0)
+      expect(noun2.at(index: 5)).to eq(1)
+
+      expect(noun2.at(index: 6)).to eq(2)
+      expect(noun2.at(index: 7).ary).to eq([3, 4])
+
+      expect {noun1.at(index: 8)}.to raise_error(ArgumentError)
+      expect {noun1.at(index: 9)}.to raise_error(ArgumentError)
+
+      expect(noun2.at(index: 14)).to eq(3)
+      expect(noun2.at(index: 15)).to eq(4)
+      expect {noun1.at(index: 16)}.to raise_error(ArgumentError)
     end
   end
 end

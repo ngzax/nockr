@@ -15,7 +15,7 @@ module Nockr
         return Atom.new(ary) unless ary.is_a? Array
         return Atom.new(ary[0]) if 1 == ary.size
         return Cell.new(head: nonify(ary[0]), tail: nonify(ary[1])) if 2 == ary.size
-        return [ary[0], nonify(ary[1..])]
+        return Cell.new(head: nonify(ary[0]), tail: nonify(ary[1..]))
       end
 
       #
@@ -39,14 +39,5 @@ module Nockr
       another_noun.ary == self.ary
     end
 
-    def at(index:)
-      return self if 1 == index
-      return self.n.at(index: index) if index < 4
-      n = index / 2
-      r = (index % 2) - 1
-      return self.n.at(index: n).at(index: n + r)
-    end
-
-    # private
   end
 end

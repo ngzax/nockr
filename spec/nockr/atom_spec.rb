@@ -22,6 +22,12 @@ describe Nockr::Atom do
     end
   end
 
+  context "printing" do
+    it "can be represented as a string" do
+      expect(atom0.to_s).to eq "0"
+    end
+  end
+
   context "testing" do
     it "knows its an atom" do
       expect(atom0.atom?).to be true
@@ -39,7 +45,7 @@ describe Nockr::Atom do
       expect(atom0.at(index: 1)).to eq(atom0)
     end
 
-    it "crashes for any index > 1" do
+    it "crashes for any index > 3" do
       # .*(1 [0 2]) => dojo: hoon expression failed
       expect {atom0.at(index: 8)}.to raise_error(ArgumentError)
     end

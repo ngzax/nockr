@@ -32,6 +32,12 @@ describe Nockr::Cell do
     end
   end
 
+  context "printing" do
+    it "can be represented as a string" do
+      expect(cell_aa.to_s).to eq "[0 1]"
+    end
+  end
+
   context "testing" do
     it "knows its a cell" do
       expect(cell_aa.cell?).to be true

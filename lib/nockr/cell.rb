@@ -18,10 +18,29 @@ module Nockr
     end
 
     def at(index:)
-      raise ArgumentError.new("Invalid Index.") if index < 1 || index > 3
+      raise ArgumentError.new("Invalid Index.") if index < 1
+
       return self if 1 == index
-      return @h if 2 == index
-      return @t if 3 == index
+      return @h   if 2 == index
+      return @t   if 3 == index
+
+      bin = index.to_s(2)
+      bin.slice!(0)
+      raise ArgumentError.new("Invalid Index.") if bin.nil?
+
+      non = self
+      depth = 0
+
+      bin.each_char do |b|
+        depth += 1
+        if non.cell?
+          non = ('0' == b) ? non.h : non.t
+        else
+          raise ArgumentError.new("Invalid Index.") unless depth < bin.length
+        end
+      end
+
+      non
     end
 
     def atom?
@@ -30,6 +49,10 @@ module Nockr
 
     def cell?
       true
+    end
+
+    def to_s
+      "[#{self.h} #{self.t}]"
     end
   end
 end

@@ -10,7 +10,7 @@ module Nockr
     end
 
     def ==(another_atom)
-      another_atom.i == self.i
+      another_atom.i == self.i || another_atom == self.i
     end
 
     def ary
@@ -19,6 +19,11 @@ module Nockr
 
     def at(index:)
       raise ArgumentError.new("an Atom has no index > 1") unless 1 == index
+      self
+    end
+
+    def at(index:)
+      raise ArgumentError.new("Invalid Index.") if index < 1 || index > 3
       self
     end
 
@@ -36,6 +41,10 @@ module Nockr
 
     def t
       i
+    end
+
+    def to_s
+      "#{self.i}"
     end
   end
 end
