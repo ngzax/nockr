@@ -81,4 +81,11 @@ describe Nockr::Cell do
       expect {cell_aa.at(index: 8)}.to raise_error(ArgumentError)
     end
   end
+
+  context "urbit syntax" do
+    it "parses a cell into subject and formula" do
+      expect(Nockr::Noun.raw("[[50 51] [0 2]]").subject.ary).to eq([50, 51])
+      expect(Nockr::Noun.raw("[[50 51] [0 2]]").formula.ary).to eq([0, 2])
+    end
+  end
 end

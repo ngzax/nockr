@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+require 'json'
 
 module Nockr
   class Noun
@@ -16,7 +17,16 @@ module Nockr
         return Cell.new(head: nonify(ary[0]), tail: nonify(ary[1..]))
       end
 
-      #
+      def raw(hoon)
+        return from_ary(to_ary(hoon))
+      end
+
+      def to_ary(cell_string)
+        c = cell_string.gsub(' ', ',')
+        JSON.parse(c)
+      end
+
+
       # [a b c]  [a [b c]]
       #
       # q.v. https://github.com/belisarius222/pynock

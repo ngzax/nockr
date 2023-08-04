@@ -8,7 +8,7 @@ module Nockr
 
   class << self
     def nock(input)
-      n = Noun.from_ary input
+      n = Noun.raw input
       puts "Interpreting #{input} as Nock..."
       puts "=> #{n.interpret}"
     end
