@@ -115,9 +115,5 @@ describe Nockr::Noun do
       expect(Nockr::Noun.from_ary([[50,51],[0,2]]).ary).to eq([[50, 51], [0, 2]])
       expect(Nockr::Noun.raw("[[50 51] [0 2]]").ary).to    eq([[50, 51], [0, 2]])
     end
-
-    it "parses a cell into subject and formula" do
-      expect(Nockr::Noun.raw("[[50 51] [0 2]]").subject).to eq([50, 51])
-    end
   end
 end

@@ -87,5 +87,9 @@ describe Nockr::Cell do
       expect(Nockr::Noun.raw("[[50 51] [0 2]]").subject.ary).to eq([50, 51])
       expect(Nockr::Noun.raw("[[50 51] [0 2]]").formula.ary).to eq([0, 2])
     end
+
+    it "extracts the nock opcode from the formula" do
+      expect(Nockr::Noun.raw("[[50 51] [0 2]]").opcode).to eq(0)
+    end
   end
 end
