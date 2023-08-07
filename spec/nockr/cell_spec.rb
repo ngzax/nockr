@@ -91,5 +91,9 @@ describe Nockr::Cell do
     it "extracts the nock opcode from the formula" do
       expect(Nockr::Noun.raw("[[50 51] [0 2]]").opcode).to eq(0)
     end
+
+    it "extracts the nock opcode from the formula for recursive operations" do
+      expect(Nockr::Noun.raw("[50 [4 0 1]]").opcode).to eq(4)
+    end
   end
 end
