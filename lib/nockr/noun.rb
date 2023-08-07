@@ -48,8 +48,12 @@ module Nockr
       if 0 == self.opcode.i
         raise ArgumentError.new("Slot must be an Atom") unless self.slot.is_a? Atom
         return self.subject.at(index: self.slot.i)
+      elsif 1 == self.opcode.i
+        return self.slot
       end
-      self.slot
+      base = Noun.from_ary(self.subject.ary << self.formula.at(index: 3).ary)
+      n = Noun.from_ary([base.interpret.i])
+      n.i += 1
     end
   end
 end

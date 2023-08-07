@@ -56,7 +56,7 @@ module Nockr
     end
 
     def nock?
-      self.h.cell? && self.t.cell?
+      self.t.cell?
     end
 
     def opcode

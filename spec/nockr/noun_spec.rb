@@ -156,9 +156,22 @@ describe Nockr::Noun do
         expect(Nockr::Noun.raw("[[20 30] [1 67]]").interpret).to eq(67)
       end
 
-      it "echos slot 7 when its a cell" do
+      it "echos slot 7 when it's a cell" do
         expect(Nockr::Noun.raw("[[20 30] [1 [2 587]]]").interpret.ary).to eq([2, 587])
+        expect(Nockr::Noun.raw("[[20 30] [1 [2 587]]]").interpret.to_s).to eq('[2 587]')
       end
+    end
+
+    context "Nock 4" do
+      # *[a 4 b]  +*[a b]
+      it "increments a when it's an atom" do
+        expect(Nockr::Noun.raw("[50 [4 0 1]]").interpret).to eq(51)
+      end
+
+      # it "echos slot 7 when it's a cell" do
+      #   expect(Nockr::Noun.raw("[[20 30] [1 [2 587]]]").interpret.ary).to eq([2, 587])
+      #   expect(Nockr::Noun.raw("[[20 30] [1 [2 587]]]").interpret.to_s).to eq('[2 587]')
+      # end
     end
   end
 end
