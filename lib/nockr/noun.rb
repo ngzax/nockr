@@ -45,8 +45,11 @@ module Nockr
 
     def interpret
       raise "Cannot interpret without [[subject] [formula]]" unless self.nock?
-      raise ArgumentError.new("Slot must be an Atom") unless self.slot.is_a? Atom
-      self.subject.at(index: self.slot.i)
+      if 0 == self.opcode.i
+        raise ArgumentError.new("Slot must be an Atom") unless self.slot.is_a? Atom
+        return self.subject.at(index: self.slot.i)
+      end
+      self.slot
     end
   end
 end

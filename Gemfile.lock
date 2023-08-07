@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    nockr (0.0.3)
+    nockr (0.0.4)
 
 GEM
   remote: https://rubygems.org/
