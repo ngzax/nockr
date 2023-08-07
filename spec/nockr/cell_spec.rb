@@ -32,6 +32,12 @@ describe Nockr::Cell do
     end
   end
 
+  context "printing" do
+    it "can be represented as a string" do
+      expect(cell_aa.to_s).to eq "[0 1]"
+    end
+  end
+
   context "testing" do
     it "knows its a cell" do
       expect(cell_aa.cell?).to be true
@@ -39,6 +45,11 @@ describe Nockr::Cell do
 
     it "knows its not an atom" do
       expect(cell_aa.atom?).to be false
+    end
+
+    it "can be nock only if it is a cell of cells" do
+      expect(cell_aa.nock?).to be false
+      expect(Nockr::Noun.from_ary([[2, [3, 4]], [0, 1]]).nock?).to be true
     end
   end
 
@@ -68,6 +79,17 @@ describe Nockr::Cell do
     it "crashes on invalid indexes" do
       expect {cell_aa.at(index: 0)}.to raise_error(ArgumentError)
       expect {cell_aa.at(index: 8)}.to raise_error(ArgumentError)
+    end
+  end
+
+  context "urbit syntax" do
+    it "parses a cell into subject and formula" do
+      expect(Nockr::Noun.raw("[[50 51] [0 2]]").subject.ary).to eq([50, 51])
+      expect(Nockr::Noun.raw("[[50 51] [0 2]]").formula.ary).to eq([0, 2])
+    end
+
+    it "extracts the nock opcode from the formula" do
+      expect(Nockr::Noun.raw("[[50 51] [0 2]]").opcode).to eq(0)
     end
   end
 end
