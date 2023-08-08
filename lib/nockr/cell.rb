@@ -55,10 +55,6 @@ module Nockr
       self.at(index: 3)
     end
 
-    def nock?
-      self.t.cell?
-    end
-
     def opcode
       self.formula.at(index: 2)
     end
