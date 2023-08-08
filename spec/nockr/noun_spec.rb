@@ -104,16 +104,16 @@ describe Nockr::Noun do
   context "urbit syntax" do
     # e.g. in the urbit dojo and code a cell looks like: [a b c d] as shorthand for [a [b [c d]]]
     it "can accept a simple string in urbit 'cell' format" do
-      expect(Nockr::Nock.new('[0 1 2 3]').ary).to              eq([0, [1, [2, 3]]])
-      expect(Nockr::Nock.new('[0 1 2 3]').at(index: 1).ary).to eq([0, [1, [2, 3]]])
-      expect(Nockr::Nock.new('[0 1 2 3]').at(index: 2)).to     eq(0)
-      expect(Nockr::Nock.new('[0 1 2 3]').at(index: 3).ary).to eq([1, [2, 3]])
-      expect(Nockr::Nock.new('[0 1 2 3]').at(index: 6)).to     eq(1)
+      expect(Nockr::Nock.parse('[0 1 2 3]').ary).to              eq([0, [1, [2, 3]]])
+      expect(Nockr::Nock.parse('[0 1 2 3]').at(index: 1).ary).to eq([0, [1, [2, 3]]])
+      expect(Nockr::Nock.parse('[0 1 2 3]').at(index: 2)).to     eq(0)
+      expect(Nockr::Nock.parse('[0 1 2 3]').at(index: 3).ary).to eq([1, [2, 3]])
+      expect(Nockr::Nock.parse('[0 1 2 3]').at(index: 6)).to     eq(1)
     end
 
     it "can accept a complex string in urbit 'cell' format" do
       expect(Nockr::Noun.from_ary([[50,51],[0,2]]).ary).to eq([[50, 51], [0, 2]])
-      expect(Nockr::Nock.new("[[50 51] [0 2]]").ary).to    eq([[50, 51], [0, 2]])
+      expect(Nockr::Nock.parse("[[50 51] [0 2]]").ary).to    eq([[50, 51], [0, 2]])
     end
   end
 end

@@ -2,9 +2,11 @@
 
 module Nockr
   class Nock < Cell
-    def initialize(a_noun)
-      n = Noun.from_ary(Noun.to_ary(a_noun))
-      super(head: n.h, tail: n.t)
+    class << self
+      def parse(a_noun)
+        n = Noun.from_ary(Noun.to_ary(a_noun))
+        new(head: n.h, tail: n.t)
+      end
     end
 
     def formula
@@ -20,7 +22,7 @@ module Nockr
         return self.slot
       end
       base = Noun.from_ary(self.subject.ary << self.formula.at(index: 3).ary)
-      n = Nock.new(base.to_s).interpret
+      n = Nock.parse(base.to_s).interpret
       n.i += 1
     end
 
