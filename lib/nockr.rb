@@ -9,7 +9,7 @@ module Nockr
 
   class << self
     def nock(input)
-      n = Nock.new input
+      n = Nock.parse input
       puts "Interpreting #{input} as Nock..."
       puts "=> #{n.interpret}"
     end

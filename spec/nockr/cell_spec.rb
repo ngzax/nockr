@@ -84,16 +84,16 @@ describe Nockr::Cell do
 
   context "urbit syntax" do
     it "parses a cell into subject and formula" do
-      expect(Nockr::Nock.new("[[50 51] [0 2]]").subject.ary).to eq([50, 51])
-      expect(Nockr::Nock.new("[[50 51] [0 2]]").formula.ary).to eq([0, 2])
+      expect(Nockr::Nock.parse("[[50 51] [0 2]]").subject.ary).to eq([50, 51])
+      expect(Nockr::Nock.parse("[[50 51] [0 2]]").formula.ary).to eq([0, 2])
     end
 
     it "extracts the nock opcode from the formula" do
-      expect(Nockr::Nock.new("[[50 51] [0 2]]").opcode).to eq(0)
+      expect(Nockr::Nock.parse("[[50 51] [0 2]]").opcode).to eq(0)
     end
 
     it "extracts the nock opcode from the formula for recursive operations" do
-      expect(Nockr::Nock.new("[50 [4 0 1]]").opcode).to eq(4)
+      expect(Nockr::Nock.parse("[50 [4 0 1]]").opcode).to eq(4)
     end
   end
 end
