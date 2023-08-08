@@ -3,6 +3,8 @@ require 'json'
 
 module Nockr
   class Noun
+    attr_accessor :ary, :n
+
     class << self
       def from_ary(ary)
         raise ArgumentError.new("a Noun must be initialized with an Array") unless ary.is_a? Array
@@ -17,15 +19,10 @@ module Nockr
         return Cell.new(head: nonify(ary[0]), tail: nonify(ary[1..]))
       end
 
-      def raw(hoon)
-        return from_ary(to_ary(hoon))
-      end
-
       def to_ary(cell_string)
         c = cell_string.gsub(' ', ',')
         JSON.parse(c)
       end
-
 
       # [a b c]  [a [b c]]
       #
@@ -43,17 +40,9 @@ module Nockr
       raise "Cannot initialize an abstract Noun class"
     end
 
-    def interpret
-      raise "Cannot interpret without [[subject] [formula]]" unless self.nock?
-      if 0 == self.opcode.i
-        raise ArgumentError.new("Slot must be an Atom") unless self.slot.is_a? Atom
-        return self.subject.at(index: self.slot.i)
-      elsif 1 == self.opcode.i
-        return self.slot
-      end
-      base = Noun.from_ary(self.subject.ary << self.formula.at(index: 3).ary)
-      n = Noun.from_ary([base.interpret.i])
-      n.i += 1
+    # Nouns are not, in general, nock.
+    def nock?
+      false
     end
   end
 end
