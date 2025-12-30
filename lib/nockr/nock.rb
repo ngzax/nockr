@@ -23,7 +23,7 @@ module Nockr
       end
       base = Noun.from_ary(self.subject.ary << self.formula.at(index: 3).ary)
       n = Nock.parse(base.to_s).interpret
-      n.i += 1
+      n.increment if !n.nil? && n.atom?
     end
 
     def nock?

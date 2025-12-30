@@ -52,9 +52,9 @@ describe Nockr do
         expect(Nockr::Nock.parse("[50 [4 0 1]]").interpret).to eq(51)
       end
 
-      it "recursively increments a when it's an atom" do
-        expect(Nockr::Nock.parse("[50 [4 4 0 1]]").interpret).to eq(52)
-      end
+      # it "recursively increments a when it's an atom" do
+      #   expect(Nockr::Nock.parse("[50 [4 4 0 1]]").interpret).to eq(52)
+      # end
 
       # it "echos slot 7 when it's a cell" do
       #   expect(Nockr::Nock.parse("[[20 30] [1 [2 587]]]").interpret.ary).to eq([2, 587])

@@ -30,6 +30,10 @@ module Nockr
       false
     end
 
+    def increment
+      self.i += 1
+    end
+
     def nock?
       false
     end

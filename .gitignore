@@ -1,3 +1,9 @@
+# erlang
+.DS_Store
+_build/**
+erl_crash.dump
+
+# Ruby
 *.gem
 *.rbc
 /.config
