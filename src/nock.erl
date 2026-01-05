@@ -11,6 +11,25 @@ parse(String) when is_list(String) ->
     %% Convert to Noun
     noun:from_list(Term).
 
+%% Parse a list until we hit the closing bracket
+parse_list([']'|Rest], Acc) ->
+    {lists:reverse(Acc), Rest};
+parse_list(Tokens, Acc) ->
+    {Elem, Remaining} = parse_tokens(Tokens),
+    parse_list(Remaining, [Elem|Acc]).
+
+%% Parse a number from the input
+parse_number([C|Rest], Acc) when C >= $0, C =< $9 ->
+    parse_number(Rest, [C|Acc]);
+parse_number(Rest, Acc) ->
+    {Acc, Rest}.
+
+%% Parse tokens into nested list structure
+parse_tokens(['['|Rest]) ->
+    parse_list(Rest, []);
+parse_tokens([N|Rest]) when is_integer(N) ->
+    {N, Rest}.
+
 %% Tokenize string into brackets and numbers
 tokenize(String) ->
     tokenize(String, []).
@@ -26,25 +45,6 @@ tokenize([$ |Rest], Acc) ->  % skip spaces
 tokenize([C|Rest], Acc) when C >= $0, C =< $9 ->
     {Num, Remaining} = parse_number([C|Rest], []),
     tokenize(Remaining, [list_to_integer(lists:reverse(Num))|Acc]).
-
-%% Parse a number from the input
-parse_number([C|Rest], Acc) when C >= $0, C =< $9 ->
-    parse_number(Rest, [C|Acc]);
-parse_number(Rest, Acc) ->
-    {Acc, Rest}.
-
-%% Parse tokens into nested list structure
-parse_tokens(['['|Rest]) ->
-    parse_list(Rest, []);
-parse_tokens([N|Rest]) when is_integer(N) ->
-    {N, Rest}.
-
-%% Parse a list until we hit the closing bracket
-parse_list([']'|Rest], Acc) ->
-    {lists:reverse(Acc), Rest};
-parse_list(Tokens, Acc) ->
-    {Elem, Remaining} = parse_tokens(Tokens),
-    parse_list(Remaining, [Elem|Acc]).
 
 %% Main interpreter entry point
 nock(Input) when is_list(Input) ->

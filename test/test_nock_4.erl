@@ -13,6 +13,14 @@ nock_4_increment_test() ->
     %% [50 [4 0 1]] -> 51
     %% Subject is 50, formula is [4 0 1]
     %% *[50 4 0 1] -> +*[50 0 1] -> +50 -> 51
-    Nock = nock:parse("[50 [4 [0 1]]]"),
+    Nock = nock:parse("[50 [4 0 1]]"),
     Result = nock:interpret(Nock),
     ?assertEqual(51, Result).
+
+nock_4_recursive_increment_test() ->
+    %% [50 [4 4 0 1]] -> 52
+    %% Subject is 50, formula is [4 [4 0 1]]
+    %% *[50 [4 4 0 1]] -> +*[50 [4 0 1]] -> ++*[50 [0 1]] -> ++/[1 50] -> ++(50) -> +(51) -> 52
+    Nock = nock:parse("[50 [4 4 0 1]]"),
+    Result = nock:interpret(Nock),
+    ?assertEqual(52, Result).
