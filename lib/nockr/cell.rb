@@ -51,26 +51,6 @@ module Nockr
       true
     end
 
-    def formula
-      self.at(index: 3)
-    end
-
-    def nock?
-      self.h.cell? && self.t.cell?
-    end
-
-    def opcode
-      self.formula.at(index: 2)
-    end
-
-    def slot
-      self.formula.at(index: 3)
-    end
-
-    def subject
-      self.at(index: 2)
-    end
-
     def to_s
       "[#{self.h} #{self.t}]"
     end

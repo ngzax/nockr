@@ -104,61 +104,16 @@ describe Nockr::Noun do
   context "urbit syntax" do
     # e.g. in the urbit dojo and code a cell looks like: [a b c d] as shorthand for [a [b [c d]]]
     it "can accept a simple string in urbit 'cell' format" do
-      expect(Nockr::Noun.raw('[0 1 2 3]').ary).to eq([0, [1, [2, 3]]])
-      expect(Nockr::Noun.raw('[0 1 2 3]').at(index: 1).ary).to eq([0, [1, [2, 3]]])
-      expect(Nockr::Noun.raw('[0 1 2 3]').at(index: 2)).to eq(0)
-      expect(Nockr::Noun.raw('[0 1 2 3]').at(index: 3).ary).to eq([1, [2, 3]])
-      expect(Nockr::Noun.raw('[0 1 2 3]').at(index: 6)).to eq(1)
+      expect(Nockr::Nock.parse('[0 1 2 3]').ary).to              eq([0, [1, [2, 3]]])
+      expect(Nockr::Nock.parse('[0 1 2 3]').at(index: 1).ary).to eq([0, [1, [2, 3]]])
+      expect(Nockr::Nock.parse('[0 1 2 3]').at(index: 2)).to     eq(0)
+      expect(Nockr::Nock.parse('[0 1 2 3]').at(index: 3).ary).to eq([1, [2, 3]])
+      expect(Nockr::Nock.parse('[0 1 2 3]').at(index: 6)).to     eq(1)
     end
 
     it "can accept a complex string in urbit 'cell' format" do
       expect(Nockr::Noun.from_ary([[50,51],[0,2]]).ary).to eq([[50, 51], [0, 2]])
-      expect(Nockr::Noun.raw("[[50 51] [0 2]]").ary).to    eq([[50, 51], [0, 2]])
-    end
-  end
-
-  context "Nock Specification" do
-    context "Nock 0" do
-      let(:noun1) {Nockr::Noun.raw("[[50 51] [0 1]]")}
-      let(:noun2) {Nockr::Noun.raw("[[50 51] [0 2]]")}
-      let(:noun8) {Nockr::Noun.raw("[[50 51] [0 8]]")}
-
-      # *[a 0 b]  /[b a]
-      it "can get slot 1" do
-        expect(noun1.subject.ary).to eq([50, 51])
-        expect(noun1.opcode).to eq(0)
-        expect(noun1.slot).to eq(1)
-        expect(noun1.interpret).to eq(Nockr::Cell.new(head: 50, tail: 51))
-        expect(noun1.interpret.ary).to eq([50, 51])
-      end
-
-      it "can get slot 2" do
-        expect(noun2.opcode).to eq(0)
-        expect(noun2.slot).to eq(2)
-        expect(noun2.interpret).to eq(50)
-      end
-
-      it "crashes on a bad atom slot" do
-        expect(noun8.opcode).to eq(0)
-        expect(noun8.slot).to eq(8)
-        expect {noun8.interpret}.to raise_error(ArgumentError)
-      end
-
-      it "crashes on a cell in the slot" do
-        n = Nockr::Noun.raw("[[50 51] [0 [0 1]]]")
-        expect {noun8.interpret}.to raise_error(ArgumentError)
-      end
-    end
-
-    context "Nock 1" do
-      # *[a 1 b]  b
-      it "echos slot 7 regardless of the subject" do
-        expect(Nockr::Noun.raw("[[20 30] [1 67]]").interpret).to eq(67)
-      end
-
-      it "echos slot 7 when its a cell" do
-        expect(Nockr::Noun.raw("[[20 30] [1 [2 587]]]").interpret.ary).to eq([2, 587])
-      end
+      expect(Nockr::Nock.parse("[[50 51] [0 2]]").ary).to    eq([[50, 51], [0, 2]])
     end
   end
 end

@@ -4,11 +4,12 @@ module Nockr
   require_relative "nockr/noun"
   require_relative "nockr/atom"
   require_relative "nockr/cell"
+  require_relative "nockr/nock"
   require_relative "nockr/version"
 
   class << self
     def nock(input)
-      n = Noun.raw input
+      n = Nock.parse input
       puts "Interpreting #{input} as Nock..."
       puts "=> #{n.interpret}"
     end

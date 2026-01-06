@@ -2,7 +2,7 @@
 
 module Nockr
   class Atom < Noun
-    attr_reader :i
+    attr_accessor :i
 
     def initialize(i)
       raise ArgumentError.new("an Atom must be initialized with a Natural Number") unless i.is_a? Integer
@@ -28,6 +28,10 @@ module Nockr
 
     def cell?
       false
+    end
+
+    def increment
+      self.i += 1
     end
 
     def nock?

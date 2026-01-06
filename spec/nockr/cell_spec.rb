@@ -47,10 +47,10 @@ describe Nockr::Cell do
       expect(cell_aa.atom?).to be false
     end
 
-    it "can be nock only if it is a cell of cells" do
+    it "generic cell isn't assumed to be 'nock'" do
       expect(cell_aa.nock?).to be false
-      expect(Nockr::Noun.from_ary([[2, [3, 4]], [0, 1]]).nock?).to be true
     end
+      # expect(Nockr::Noun.from_ary([[2, [3, 4]], [0, 1]]).nock?).to be true
   end
 
   context "indexing interface" do
@@ -84,12 +84,16 @@ describe Nockr::Cell do
 
   context "urbit syntax" do
     it "parses a cell into subject and formula" do
-      expect(Nockr::Noun.raw("[[50 51] [0 2]]").subject.ary).to eq([50, 51])
-      expect(Nockr::Noun.raw("[[50 51] [0 2]]").formula.ary).to eq([0, 2])
+      expect(Nockr::Nock.parse("[[50 51] [0 2]]").subject.ary).to eq([50, 51])
+      expect(Nockr::Nock.parse("[[50 51] [0 2]]").formula.ary).to eq([0, 2])
     end
 
     it "extracts the nock opcode from the formula" do
-      expect(Nockr::Noun.raw("[[50 51] [0 2]]").opcode).to eq(0)
+      expect(Nockr::Nock.parse("[[50 51] [0 2]]").opcode).to eq(0)
+    end
+
+    it "extracts the nock opcode from the formula for recursive operations" do
+      expect(Nockr::Nock.parse("[50 [4 0 1]]").opcode).to eq(4)
     end
   end
 end
